@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+  return { photoList: state.photoList };
+};
 class App extends Component {
-    constructor(){
-        super();
-        this.state = {
-            photoList: [
-                {
-                    logo: logo,
-                    id: 1
-                }, {
-                    logo: logo,
-                    id: 2
-                }
-            ]
-        }
-    }
+
 
 renderPhotoLibrary(){
     const photoElmList = [];
-        console.log(this.state.photoList);
-        this.state.photoList.map(el => {
+        console.log(this.props.photoList);
+        this.props.photoList.map(el => {
             photoElmList.push(<span id={el.id} key={el.id}><img src={el.logo} className="App-logo" alt="logo" /></span>);
         });
     return photoElmList;
@@ -42,4 +33,4 @@ renderPhotoLibrary(){
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
